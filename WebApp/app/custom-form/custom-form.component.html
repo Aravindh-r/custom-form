@@ -1,0 +1,174 @@
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fx-flex-fill>
+<!--   <div fxLayout="row" fxLayoutAlign="center" fxFlex="100" fxLayoutWrap fx-flex-fill> -->
+    <md-card class="example-card" >
+      <md-card-content align="start center">
+       <!--  <div fxLayout="row" fxLayoutAlign="center" fxFlex="100" fxLayoutWrap>
+          <div fxLayout="column" fxFlex="10"></div> -->
+          <form class="container" fxFlex="80" fxLayout="column" fxLayoutGap="10px" fxFlexFill [formGroup]="customForm" (ngSubmit)="onsubmit(customForm) " align="start center">
+            <!-- Email id -->
+            <md-input-container>
+              <input type="email" mdInput placeholder="Enter Email id" minlength="14" formControlName="email">
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('email').hasError('required') && customForm.get('email').touched" class="errorStyle">
+                  Email is required
+                </div>
+                <div *ngIf="customForm.get('email').hasError('pattern') && customForm.get('email')" class="errorStyle">
+                  Invalid email,please Enter a proper emailid
+                </div>
+              </md-hint>
+            </md-input-container>
+            <!-- Username -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter Username" formControlName="username">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('username').hasError('required') && customForm.get('username').touched" class="errorStyle">
+                    Username is required
+                  </div>
+                  <div *ngIf="customForm.get('username').hasError('pattern') && customForm.get('username')" class="errorStyle">
+                    Invalid username,length of username should be more than 10 characters
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Firstname -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter Firstname" formControlName="firstname">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('firstname').hasError('required') && customForm.get('firstname').touched" class="errorStyle">
+                    Username is required
+                  </div>
+                  <div *ngIf="customForm.get('firstname').hasError('pattern') && customForm.get('username')" class="errorStyle">
+                    Invalid firstname,length of firstname have atleast 4 characters,No special characters allowed
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Lastname -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter Lastname" formControlName="lastname">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('lastname').hasError('required') && customForm.get('lastname').touched" class="errorStyle">
+                    lastname is required
+                  </div>
+                  <div *ngIf="customForm.get('lastname').hasError('pattern') && customForm.get('lastname')" class="errorStyle">
+                    Invalid lastname,length of lastname should have atleast 1 characters,No special characters allowed
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Date Of Birth -->
+            <div>
+              <md-input-container>
+                <input [(ngModel)]="dateModel" mdInput [mdDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('dob').hasError('required') && customForm.get('dob').touched" class="errorStyle">
+                    dob is required
+                  </div>
+                </md-hint>
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker touchUi="true" #picker></md-datepicker>
+              </md-input-container>
+            </div>
+            <!-- Enter DoorNo/Flat & Area -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter DoorNo/Flat & Area" formControlName="addressline1">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('addressline1').hasError('required') && customForm.get('addressline1').touched" class="errorStyle">
+                    field is required
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Landmark -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter Landmark" formControlName="addressline2">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('addressline2').hasError('required') && customForm.get('addressline2').touched" class="errorStyle">
+                    Landmark is required
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Enter city -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="text" mdInput placeholder="Enter city" formControlName="city">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('city').hasError('required') && customForm.get('city').touched" class="errorStyle">
+                    city is required
+                  </div>
+                  <div *ngIf="customForm.get('city').hasError('pattern') && customForm.get('city')" class="errorStyle">
+                    Invalid city,please Enter a proper city
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- Select State -->
+            <div fxLayout.md="column">
+              <md-select placeholder="Select State" formControlName="state">
+                <md-option *ngFor="let states of resultTemplateData" [value]='states'>
+                  {{ states.state}}
+                </md-option>
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('state').hasError('required') && customForm.get('state').touched" class="errorStyle">
+                    state is required
+                  </div>
+                </md-hint>
+                <div fxLayoutgap.md="column">
+                </div>
+              </md-select>
+            </div>
+            <!-- Pincode -->
+            <div fxLayout.md="column">
+              <md-input-container>
+                <input type="" mdInput placeholder="Pincode" maxlength="6" formControlName="pincode">
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('pincode').hasError('required') && customForm.get('pincode').touched" class="errorStyle">
+                    Pincode is required
+                  </div>
+                  <div *ngIf="customForm.get('pincode').hasError('pattern') && customForm.get('pincode')" class="errorStyle">
+                    Invalid Pincode,length of Pincode should have 6 number without any special characters
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- about -->
+            <div fxLayout.xs="row">
+              <md-input-container class="example-full-width">
+                <textarea mdInput placeholder="write about youself" formControlName="about"></textarea>
+                <md-hint align="start" class="full-width">
+                  <div *ngIf="customForm.get('about').hasError('about') && customForm.get('about').touched" class="errorStyle">
+                    Field is required
+                  </div>
+                  <div *ngIf="customForm.get('about').hasError('pattern') && customForm.get('about')" class="errorStyle">
+                    Field should aleast contain 30 character special characters (.@_-)
+                  </div>
+                </md-hint>
+              </md-input-container>
+            </div>
+            <!-- termscondition -->
+            <div fxLayout.md="column">
+              <md-checkbox color="primary" formControlName="termscondition">I Agreed !!! Terms and Condition</md-checkbox>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('termscondition').hasError('termscondition') && customForm.get('termscondition').touched" class="errorStyle">
+                  Should Agree term and condtion to submit form
+                </div>
+              </md-hint>
+            </div>
+            <!--button  -->
+            <div fxLayout.md="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+              <button md-button>Cancel</button>
+              <button md-raised-button type="submit" color="primary" [disabled]="!customForm.valid">Submit</button>
+            </div>
+          </form>
+          <div fxLayout="column" fxFlex="10"></div>
+        <!-- </div> -->
+      </md-card-content>
+    </md-card>
+  </div>
+<!-- </div> -->

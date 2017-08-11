@@ -1,0 +1,37 @@
+<div class="container"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+    <div fxFlex="50%" *ngFor="let data of resultRegisteredForm" fx-flex-fill fxLayoutAlign="center">
+      <md-card>
+        <md-list>
+          <md-list-item>
+            <h3 md-line>{{data.firstname}} Profile</h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>Registered email is : {{data.email}} </h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>Username : {{data.username}} </h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>Users First Name is : {{data.firstname}} </h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>FullName : {{data.firstname}}  {{data.lastname}} </h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>Date Of Birth : {{data.dob}} </h3>
+          </md-list-item>
+          <md-list-item>
+            <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>
+          </md-list-item>
+           <md-list-item>
+            <h3 md-line>About me : {{data.about}}</h3>
+          </md-list-item>
+        </md-list>
+      </md-card>
+    </div>
+</div>

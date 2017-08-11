@@ -1,0 +1,17 @@
+<div [class.dark]="isDarkTheme">
+  <md-sidenav-container fullscreen class="sidenav-container">
+    <md-toolbar color="primary" class="mat-elevation-z2">
+      <span class="spacer"></span>
+      <div class="mdc-typography--display4">
+        <button md-button class="hidden-sm-down nav-button" *ngFor="let item of routinglabels" [routerLink]="[item.link]" routerLinkActive="active">
+          {{item.label}}
+        </button>
+      </div>
+    </md-toolbar>
+    <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+      </div>
+  </md-sidenav-container>
+</div>
