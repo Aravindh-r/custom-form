@@ -6,12 +6,6 @@ const logger = require('../../../../logger');
 
 const router = express.Router();
 
-/*
- * Effective URI of the API is POST 
- *
- * API for Adding members to the community
- */
-
 router.post('/', (req, res) => {
   try {
     const values = req.body;
@@ -40,7 +34,7 @@ router.get('/state', (req, res) => {
         logger.debug(err);
         return res.status(400).send(err);
       }
-      logger.debug(results);
+      //logger.debug(results);
       return res.status(200).send(results);
     });
   } catch (err) {

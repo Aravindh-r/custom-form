@@ -9,7 +9,7 @@ export class CustomFormListService {
 	constructor(private http: Http) { }
 
 	getRegisteredForms(){
-		return this.http.get('api/v1/customform')
+		return this.http.get('api/v1/customform/')
 		.map(response => response.json());
 	}
 }

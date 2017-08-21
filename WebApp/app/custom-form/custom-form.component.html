@@ -155,14 +155,14 @@
             <div fxLayout.md="column">
               <md-checkbox color="primary" formControlName="termscondition">I Agreed !!! Terms and Condition</md-checkbox>
               <md-hint align="start" class="full-width">
-                <div *ngIf="customForm.get('termscondition').hasError('termscondition') && customForm.get('termscondition').touched" class="errorStyle">
+              <div *ngIf="customForm.get('termscondition').touched"><div *ngIf="customForm.get('termscondition').hasError('required')" class="errorStyle">
                   Should Agree term and condtion to submit form
-                </div>
+                </div></div>
               </md-hint>
             </div>
             <!--button  -->
             <div fxLayout.md="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-              <button md-button>Cancel</button>
+              <!-- <button md-button (click)="backToHome()">Cancel</button> -->
               <button md-raised-button type="submit" color="primary" [disabled]="!customForm.valid">Submit</button>
             </div>
           </form>

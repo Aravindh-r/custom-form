@@ -23,7 +23,7 @@ export class CustomformService {
   }
 
  submitFormData(newFormData) {
-   //console.log('inside serveice',newFormData);
+   console.log('inside serveice',newFormData);
 // const headers = new Headers();
 //         headers.append('Content-Type', 'application/json');
     return this.http.post('api/v1/customform', newFormData)

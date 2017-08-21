@@ -31,12 +31,14 @@ import {CustomFormListComponent} from './custom-form-list/custom-form-list.compo
 import {MenuBar} from './menu-bar/menu-bar.component';
 import {RegisteredFormComponent} from "./registered-form/registered-form.component";
 import {RegisteredFormService} from "./registered-form/registered-form.service";
+import {EditRegisteredFormComponent,UpdateDialog} from "./edit-registered-form/edit-registered-form.component";
+import {EditFormService} from './edit-registered-form/edit-registered-form.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
   declarations: [
-  AppComponent,CustomFormComponent,CustomFormListComponent,SucessDialog,MenuBar,RegisteredFormComponent],
+  AppComponent,CustomFormComponent,CustomFormListComponent,EditRegisteredFormComponent,SucessDialog,MenuBar,RegisteredFormComponent,UpdateDialog],
   imports: [
     BrowserModule,
     FormsModule,
@@ -61,8 +63,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MdAutocompleteModule,
     InfiniteScrollModule
     ],
-    entryComponents: [CustomFormComponent,SucessDialog],
-    providers: [CustomformService,CustomFormListService,RegisteredFormService],
+    entryComponents: [CustomFormComponent,SucessDialog,EditRegisteredFormComponent,UpdateDialog],
+    providers: [CustomformService,CustomFormListService,RegisteredFormService,EditFormService],
     bootstrap: [AppComponent],
   })
 export class AppModule { }

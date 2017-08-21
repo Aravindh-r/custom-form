@@ -27,8 +27,12 @@ export class RegisteredFormComponent implements OnInit {
   	this.registeredFormService.getRegisteredForm(email).subscribe((registeredForm)=>{
   		this.resultRegisteredForm=registeredForm;
 
-      console.log(registeredForm);
-      console.log(this.resultRegisteredForm);
+      // console.log(registeredForm);
+      // console.log(this.resultRegisteredForm);
   	});
+  }
+  onClickEdit(email : string){
+    console.log(email);
+    this.router.navigate(['editregisteredform/'+ email]);
   }
 }

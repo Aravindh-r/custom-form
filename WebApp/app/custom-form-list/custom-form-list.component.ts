@@ -38,30 +38,31 @@ export class CustomFormListComponent implements OnInit {
   		this.resultRegisteredForms=registeredForms;
       this.resultant=this.resultRegisteredForms;
       this.resultRegisteredForms=this.resultRegisteredForms.slice(0,this.dataInAPage);
-      console.log('resultant 1 st page',this.resultRegisteredForms);
+      //console.log('resultant 1 st page',this.resultRegisteredForms);
       this.totalPages =registeredForms.length/this.dataInAPage;
       //this.resultant=this.totalPages;
       this.totalPages=Math.round(this.totalPages);
-      console.log('totalPages',this.totalPages);
+      //console.log('totalPages',this.totalPages);
       // this.onScroll();
   	});
   }
 
    onScroll(){
-     console.log('onscroll before increement dataInAPage',this.dataInAPage);
+     //console.log('onscroll before increement dataInAPage',this.dataInAPage);
      const scrolledValue = this.dataInAPage;
-     console.log('scrolledValue',scrolledValue);
+     //console.log('scrolledValue',scrolledValue);
      this.dataInAPage += 10;
-     console.log('onscroll after increement dataInAPage',this.dataInAPage);
+    // console.log('onscroll after increement dataInAPage',this.dataInAPage);
      this.page = this.page +1;
-     console.log('Current page',this.page);
+     //console.log('Current page',this.page);
      if(this.page<=this.totalPages){
      this.resultRegisteredForms=this.resultant.slice(0,this.dataInAPage);
-     console.log('resultant 2nd page',this.resultRegisteredForms); 
+     //console.log('resultant 2nd page',this.resultRegisteredForms); 
    }else{
      alert('no more pages to load')
    }
   }
+
   redirect(email: string) {
     this.router.navigate(['registeredform/'+ email]);
   }

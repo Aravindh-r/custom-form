@@ -16,10 +16,6 @@ const client = new model.Client({
   keyspace: connectionString.keyspace,
 });
 
-/*
- *POST Method - Add memebers to the community
- */
-
 function addTemplateData(data, done) {
   const arr = [];
   const query = (`INSERT INTO ${TEMPLATE_TABLE} (state,city) values(?,?)`);   
@@ -39,7 +35,7 @@ function addTemplateData(data, done) {
 
 
 function getTemplateData(done) {
-  const query = `SELECT * FROM ${TEMPLATE_TABLE} `;
+  const query = `SELECT state FROM ${TEMPLATE_TABLE} `;
   return client.execute(query, (err, results) => {
     if (!err) {
       if (results.rows.length > 0) {

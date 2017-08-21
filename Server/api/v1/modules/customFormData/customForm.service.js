@@ -12,21 +12,36 @@ const CUSTOMDATA_TABLE = 'customdata';
 
 const client = new model.Client({
   contactPoints: [connectionString.contact],
-  protocolOptions: { port: connectionString.port },
+  protocolOptions: {
+    port: connectionString.port
+  },
   keyspace: connectionString.keyspace,
 });
 
 /*
- *POST Method - Add memebers to the community
+ *POST Method - insert form into table 
  */
 
 function addMemberForm(data, done) {
-  //const arr = [];
   const query = (`INSERT INTO ${CUSTOMDATA_TABLE} (email,username,firstname,lastname,dob,addressline1,city,addressline2,state,pincode,about) values(?,?,?,?,?,?,?,?,?,?,?)`);
-  return client.execute(query,data, (err)=>{
+  return client.execute(query, data, (err) => {
+
     if (!err) {
       logger.debug('inside');
-    done(null);
+      done(null);
+    } else {
+      done(err);
+    }
+  });
+}
+
+function updateMemberForm(data, done) {
+  const query = (`UPDATE ${CUSTOMDATA_TABLE} set username = ? , firstname = ?,lastname = ?,addressline1 = ?,city= ? ,state=?,addressline2 = ?,pincode = ?,about = ? WHERE email = ?`);
+  return client.execute(query, data, (err) => {
+    logger.debug('query inside update',query);
+    if (!err) {
+      logger.debug('inside');
+      done(null);
     } else {
       done(err);
     }
@@ -38,9 +53,9 @@ function getRegisteredForms(done) {
   return client.execute(query, (err, results) => {
     if (!err) {
       if (results.rows.length > 0) {
-        logger.debug('All Forms Received',results);
-        logger.debug('pageState',results.pageState);
-        logger.debug('nextPage',results.nextPage);
+        logger.debug('All Forms Received', results);
+        logger.debug('pageState', results.pageState);
+        logger.debug('nextPage', results.nextPage);
         done(undefined, results.rows);
       } else {
         done(err, undefined);
@@ -51,7 +66,7 @@ function getRegisteredForms(done) {
   });
 }
 
-function getRegisteredForm(email,done) {
+function getRegisteredForm(email, done) {
   const query = `SELECT * FROM ${CUSTOMDATA_TABLE} WHERE email='${email}'`;
   return client.execute(query, (err, results) => {
     if (!err) {
@@ -72,4 +87,5 @@ module.exports = {
   addMemberForm,
   getRegisteredForms,
   getRegisteredForm,
+  updateMemberForm,
 };

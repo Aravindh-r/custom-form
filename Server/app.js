@@ -17,17 +17,6 @@ app.use(express.static(clientPath));
 process.stdout.write('Initializing customForm database');
 require('./dbcreation');
 
-// function welcome() {
-//   const motdFile = path.resolve(__dirname, '.webapp.motd');
-//   if (fs.existsSync(motdFile)) {
-//     const msg = fs.readFileSync(motdFile, 'utf-8');
-//     process.stdout.write(`\n${msg}\n`);
-//   } else {
-//     process.stdout.write('\n=========== Calvin WWW ===========\n');
-//   }
-// }
-// welcome();
-
 // middleware function
 app.use('/api/v1', require('./api/v1/'));
 

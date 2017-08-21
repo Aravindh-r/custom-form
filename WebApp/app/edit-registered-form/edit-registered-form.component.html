@@ -1,0 +1,130 @@
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fx-flex-fill>
+  <md-card class="example-card">
+    <md-card-content align="start center">
+      <form class="container" fxFlex="80" fxLayout="column" fxLayoutGap="10px" fxFlexFill [formGroup]="customForm" (ngSubmit)="onsubmit(customForm) " align="start center">
+        <div *ngFor="let data of resultRegisteredForm">
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input type="email" mdInput placeholder="Email" minlength="14" value={{data.email}} disabled>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input type="text" mdInput placeholder="Username" formControlName="username" ngModel={{data.username}}>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('username').dirty">
+                  <div *ngIf="customForm.get('username').hasError('pattern')">Invalid username,length of username should be more than 10 characters</div>
+                  <div *ngIf="customForm.get('username').hasError('required')">username is Required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input type="text" mdInput placeholder="Firstname" formControlName="firstname" ngModel={{data.firstname}}>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('firstname').dirty">
+                  <div *ngIf="customForm.get('firstname').hasError('pattern')">Invalid firstname,length of firstname have atleast 4 characters,No special characters allowed</div>
+                  <div *ngIf="customForm.get('firstname').hasError('required')">firstname is Required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+            <md-input-container>
+              <input type="text" mdInput placeholder="Lastname" formControlName="lastname" ngModel={{data.lastname}}>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('lastname').dirty">
+                  <div *ngIf="customForm.get('lastname').hasError('pattern')">Invalid lastname,length of lastname have atleast 1 characters,No special characters allowed</div>
+                  <div *ngIf="customForm.get('lastname').hasError('required')">lastname is Required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input mdInput placeholder="Date Of Birth" value={{data.dob}} disabled>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input type="text" mdInput placeholder="DoorNo/Flat & Area" formControlName="addressline1" ngModel={{data.addressline1}}>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('addressline1').dirty">
+                  <div *ngIf="customForm.get('addressline1').hasError('required')">
+                    field is required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column">
+            <md-input-container>
+              <input type="text" mdInput placeholder="Landmark" formControlName="addressline2" ngModel={{data.addressline2}}>
+              <md-hint align="start" class="full-width">
+                <div *ngIf="customForm.get('addressline2').dirty">
+                  <div *ngIf="customForm.get('addressline2').hasError('required')">
+                    Landmark is required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column ">
+            <md-input-container>
+              <input type="text " mdInput placeholder="City" formControlName="city" ngModel={{data.city}}>
+              <md-hint align="start " class="full-width ">
+                <div *ngIf="customForm.get('city').dirty">
+                  <div *ngIf="customForm.get('city').hasError('pattern')">Invalid city,please Enter a proper city</div>
+                  <div *ngIf="customForm.get('city').hasError('required')">city is Required
+                  </div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column ">
+            <md-select placeholder="State" formControlName="state" ngModel={{data.state}}>
+              <md-option *ngFor="let states of resultTemplateData" [value]='states.state'>
+                {{states.state}}
+              </md-option>
+              <md-hint align="start " class="full-width ">
+                <div *ngIf="customForm.get('state').dirty">
+                  <div *ngIf="customForm.get('state').hasError('required')">State is Required
+                  </div>
+                </div>
+              </md-hint>
+            </md-select>
+          </div>
+          <div fxLayout.md="column ">
+            <md-input-container>
+              <input type=" " mdInput placeholder="Pincode " maxlength="6 " formControlName="pincode" ngModel={{data.pincode}}>
+              <md-hint align="start " class="full-width ">
+                <div *ngIf="customForm.get('pincode').dirty">
+                  <div *ngIf="customForm.get( 'pincode').hasError( 'pattern')">Invalid Pincode,length of Pincode should have 6 number without any special characters</div>
+                  <div *ngIf="customForm.get( 'pincode').hasError( 'required')">PINCODE is Required</div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.xs="row ">
+            <md-input-container class="example-full-width ">
+              <textarea mdInput placeholder="About you " formControlName="about" ngModel={{data.about}}></textarea>
+              <md-hint align="start " class="full-width ">
+                <div *ngIf="customForm.get('about').dirty">
+                  <div *ngIf="customForm.get( 'about').hasError( 'pattern')">Field should aleast contain 30 character Allowed special characters (.@_-) characters</div>
+                  <div *ngIf="customForm.get( 'about').hasError( 'required')">About is Required</div>
+                </div>
+              </md-hint>
+            </md-input-container>
+          </div>
+          <div fxLayout.md="column" fxLayoutAlign="center center" fxLayoutGap="5px ">
+            <button md-button (click)="backTo(data.email)">Cancel</button>
+            <button md-raised-button type="submit" color="primary" [disabled]="!customForm.dirty">Save</button>
+          </div>
+        </div>
+      </form>
+      <div fxLayout=" column " fxFlex="10 "></div>
+    </md-card-content>
+  </md-card>
+</div>

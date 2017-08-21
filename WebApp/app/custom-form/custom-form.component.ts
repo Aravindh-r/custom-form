@@ -12,7 +12,7 @@ import {CustomformService} from './customform.service';
 })
 export class CustomFormComponent implements OnInit {
    
-   dateModel:String;
+   
 
   constructor(private fb: FormBuilder,
     private dialog: MdDialog,
@@ -21,6 +21,10 @@ export class CustomFormComponent implements OnInit {
   	private route: ActivatedRoute){
   	this.createForm();
   }
+  dateModel:String;
+   customForm : FormGroup;
+  resultTemplateData =[];
+  resulTemplateStateData =[];
     
   createForm(){
   	this.customForm=this.fb.group({
@@ -38,9 +42,7 @@ export class CustomFormComponent implements OnInit {
       termscondition: ['', Validators.required],
   	});
   }
-  customForm : FormGroup;
-	resultTemplateData =[];
-	resulTemplateStateData =[];
+ 
 
   ngOnInit() {
   	this.getTemplateData();
@@ -76,6 +78,9 @@ export class CustomFormComponent implements OnInit {
   	this.customformService.getTemplateData().subscribe((tempateData)=>{
   		this.resultTemplateData =tempateData;
   	});
+  }
+  backToHome(){
+    this.router.navigate(['/customform/']);
   }
 }
 

@@ -6,6 +6,7 @@
      fxLayoutGap.xs="0">
     <div fxFlex="50%" *ngFor="let data of resultRegisteredForm" fx-flex-fill fxLayoutAlign="center">
       <md-card>
+      <md-card-content>
         <md-list>
           <md-list-item>
             <h3 md-line>{{data.firstname}} Profile</h3>
@@ -32,6 +33,8 @@
             <h3 md-line>About me : {{data.about}}</h3>
           </md-list-item>
         </md-list>
+         <button (click)= "onClickEdit(data.email)">Edit</button>
+        </md-card-content>       
       </md-card>
     </div>
 </div>
