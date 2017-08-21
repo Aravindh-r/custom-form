@@ -53,9 +53,9 @@ function getRegisteredForms(done) {
   return client.execute(query, (err, results) => {
     if (!err) {
       if (results.rows.length > 0) {
-        logger.debug('All Forms Received', results);
-        logger.debug('pageState', results.pageState);
-        logger.debug('nextPage', results.nextPage);
+        // logger.debug('All Forms Received', results);
+        // logger.debug('pageState', results.pageState);
+        // logger.debug('nextPage', results.nextPage);
         done(undefined, results.rows);
       } else {
         done(err, undefined);
