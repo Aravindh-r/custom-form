@@ -10,6 +10,8 @@ const logger = require('../../../../logger');
 
 const CUSTOMDATA_TABLE = 'customdata';
 
+const FORMLIKED_TABLE= 'likememberform';
+
 const client = new model.Client({
   contactPoints: [connectionString.contact],
   protocolOptions: {
@@ -82,10 +84,38 @@ function getRegisteredForm(email, done) {
   });
 }
 
+function likeMemberForm(data, done) {
+  const query = (`UPDATE ${CUSTOMDATA_TABLE} set username = ? , firstname = ?,lastname = ?,addressline1 = ?,city= ? ,state=?,addressline2 = ?,pincode = ?,about = ? WHERE email = ?`);
+  return client.execute(query, data, (err) => {
+    logger.debug('query inside update',query);
+    if (!err) {
+      logger.debug('inside');
+      done(null);
+    } else {
+      done(err);
+    }
+  });
+}
+
+function unlikeMemberForm(data, done) {
+  const query = (`UPDATE ${CUSTOMDATA_TABLE} set username = ? , firstname = ?,lastname = ?,addressline1 = ?,city= ? ,state=?,addressline2 = ?,pincode = ?,about = ? WHERE email = ?`);
+  return client.execute(query, data, (err) => {
+    logger.debug('query inside update',query);
+    if (!err) {
+      logger.debug('inside');
+      done(null);
+    } else {
+      done(err);
+    }
+  });
+}
+
 
 module.exports = {
   addMemberForm,
   getRegisteredForms,
   getRegisteredForm,
   updateMemberForm,
+  likeMemberForm,
+  unlikeMemberForm,
 };

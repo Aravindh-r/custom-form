@@ -20,4 +20,7 @@
     </md-list>
   <!-- </div> -->
 </div>
+<!-- <button (click)="onScroll()">load more.....!!!!</button> -->
+<div *ngIf="totalData > dataInAPage">
 <button (click)="onScroll()">load more.....!!!!</button>
+</div>

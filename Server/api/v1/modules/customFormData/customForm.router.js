@@ -80,4 +80,42 @@ router.get('/:email', (req, res) => {
   }
 });
 
+router.patch('/liked', (req, res) => {
+  try {
+    const values = req.body;
+    logger.debug(values);
+    customFormCtrl.likeMemberForm(values, (err,results) => {
+      if (err) {
+        logger.debug(err);
+        return res.status(400).send(err);
+      }else{
+      logger.debug('New Data added');
+      return res.status(200).send({ message: 'New Data added' });
+    }
+    });
+  } catch (err) {
+    logger.debug('Unexpected error in inserting values ', err);
+    res.status(500).send({ error: 'Unexpected error occurred, please try again...! ' });
+  }
+});
+
+router.patch('/disliked', (req, res) => {
+  try {
+    const values = req.body;
+    logger.debug(values);
+    customFormCtrl.dislikeMemberForm(values, (err,results) => {
+      if (err) {
+        logger.debug(err);
+        return res.status(400).send(err);
+      }else{
+      logger.debug('New Data added');
+      return res.status(200).send({ message: 'New Data added' });
+    }
+    });
+  } catch (err) {
+    logger.debug('Unexpected error in inserting values ', err);
+    res.status(500).send({ error: 'Unexpected error occurred, please try again...! ' });
+  }
+})
+
 module.exports = router;

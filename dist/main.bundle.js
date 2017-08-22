@@ -57,6 +57,8 @@ var CustomFormListComponent = (function () {
             _this.resultant = _this.resultRegisteredForms;
             _this.resultRegisteredForms = _this.resultRegisteredForms.slice(0, _this.dataInAPage);
             //console.log('resultant 1 st page',this.resultRegisteredForms);
+            _this.totalData = registeredForms.length;
+            console.log('data available', _this.totalData);
             _this.totalPages = registeredForms.length / _this.dataInAPage;
             //this.resultant=this.totalPages;
             _this.totalPages = Math.round(_this.totalPages);
@@ -77,8 +79,16 @@ var CustomFormListComponent = (function () {
             //console.log('resultant 2nd page',this.resultRegisteredForms); 
         }
         else {
-            alert('no more pages to load');
-        }
+            this.resultRegisteredForms = this.resultant.slice(0, this.totalData);
+        } /*else{
+          alert('no more pages to load')
+        }*/
+        // if(this.dataInAPage === this.totalData){
+        //   alert('no more pages to load');
+        // }else{
+        //   this.resultRegisteredForms === this.resultant.slice(0,this.totalData);
+        // }
+        // alert('no more pages to load')
     };
     CustomFormListComponent.prototype.redirect = function (email) {
         this.router.navigate(['registeredform/' + email]);
@@ -841,7 +851,7 @@ module.exports = "<menu-bar></menu-bar>"
 /***/ 265:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n\n  <!-- <h3 md-Header>LIST OF FORMS</h3> -->\n  <!-- <div infiniteScroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll()\"> -->\n    <!-- <div> -->\n    <md-list>\n      <!-- <button (scroll)=\"onClick($event)\">click me</button> -->\n      <!-- <div infinite-scroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll1()\" class=\"results\"> -->\n      <!--  <div data-infinite-scroll debounce  [infiniteScrollDistance]=\"2\"  [infiniteScrollThrottle]=\"300\" (scrolled)=\"onScroll1()\"> -->\n      <div *ngFor=\"let form of resultRegisteredForms\" (click)=\"redirect(form.email)\">\n        <md-list-item>\n          <!-- <img md-list-avatar src=\"...\" alt=\"Desc 1\"> -->\n          <md-icon md-list-icon><i class=\"material-icons\">account_circle</i></md-icon>\n          <!-- <i class=\"material-icons\">contact_mail</i> -->\n          <h3 md-line>{{form.username}}</h3>\n          <h3 md-line>{{form.email}}</h3>\n        </md-list-item>\n        <!-- </div> -->\n      </div>\n    </md-list>\n  <!-- </div> -->\n</div>\n<button (click)=\"onScroll()\">load more.....!!!!</button>"
+module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n\n  <!-- <h3 md-Header>LIST OF FORMS</h3> -->\n  <!-- <div infiniteScroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll()\"> -->\n    <!-- <div> -->\n    <md-list>\n      <!-- <button (scroll)=\"onClick($event)\">click me</button> -->\n      <!-- <div infinite-scroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll1()\" class=\"results\"> -->\n      <!--  <div data-infinite-scroll debounce  [infiniteScrollDistance]=\"2\"  [infiniteScrollThrottle]=\"300\" (scrolled)=\"onScroll1()\"> -->\n      <div *ngFor=\"let form of resultRegisteredForms\" (click)=\"redirect(form.email)\">\n        <md-list-item>\n          <!-- <img md-list-avatar src=\"...\" alt=\"Desc 1\"> -->\n          <md-icon md-list-icon><i class=\"material-icons\">account_circle</i></md-icon>\n          <!-- <i class=\"material-icons\">contact_mail</i> -->\n          <h3 md-line>{{form.username}}</h3>\n          <h3 md-line>{{form.email}}</h3>\n        </md-list-item>\n        <!-- </div> -->\n      </div>\n    </md-list>\n  <!-- </div> -->\n</div>\n<!-- <button (click)=\"onScroll()\">load more.....!!!!</button> -->\n<div *ngIf=\"totalData > dataInAPage\">\n<button (click)=\"onScroll()\">load more.....!!!!</button>\n</div>"
 
 /***/ }),
 

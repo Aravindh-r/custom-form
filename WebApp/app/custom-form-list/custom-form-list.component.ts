@@ -20,6 +20,7 @@ export class CustomFormListComponent implements OnInit {
 	resultRegisteredForms;
   dataInAPage:number;
   totalPages:number;
+  totalData:number;
   page;
   resultant;
 	ngOnInit() {
@@ -39,6 +40,8 @@ export class CustomFormListComponent implements OnInit {
       this.resultant=this.resultRegisteredForms;
       this.resultRegisteredForms=this.resultRegisteredForms.slice(0,this.dataInAPage);
       //console.log('resultant 1 st page',this.resultRegisteredForms);
+      this.totalData =registeredForms.length;
+      console.log('data available',this.totalData);
       this.totalPages =registeredForms.length/this.dataInAPage;
       //this.resultant=this.totalPages;
       this.totalPages=Math.round(this.totalPages);
@@ -58,14 +61,20 @@ export class CustomFormListComponent implements OnInit {
      if(this.page<=this.totalPages){
      this.resultRegisteredForms=this.resultant.slice(0,this.dataInAPage);
      //console.log('resultant 2nd page',this.resultRegisteredForms); 
-   }else{
-     alert('no more pages to load')
-   }
+   }else /*if(this.totalData !== this.dataInAPage)*/{
+       this.resultRegisteredForms = this.resultant.slice(0,this.totalData);
+     }/*else{
+       alert('no more pages to load')
+     }*/
+     // if(this.dataInAPage === this.totalData){
+     //   alert('no more pages to load');
+     // }else{
+     //   this.resultRegisteredForms === this.resultant.slice(0,this.totalData);
+     // }
+     // alert('no more pages to load')
   }
 
   redirect(email: string) {
     this.router.navigate(['registeredform/'+ email]);
   }
- 
-
 }

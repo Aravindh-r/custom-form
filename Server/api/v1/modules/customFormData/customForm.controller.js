@@ -16,9 +16,20 @@ function getRegisteredForm(email,done){
 	customFormService.getRegisteredForm(email,done);
 }
 
+function likeMemberForm(values,done){
+  customFormService.likeMemberForm(values,done);
+}
+
+function unlikeMemberForm(values,done){
+  customFormService.unlikeMemberForm(values,done);
+}
+
+
 module.exports = {
   addMemberForm,
   getRegisteredForms,
   getRegisteredForm,
   updateMemberForm,
+  likeMemberForm,
+  unlikeMemberForm,
 };
