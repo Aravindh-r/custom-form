@@ -34,8 +34,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-//import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 var CustomFormListComponent = (function () {
     function CustomFormListComponent(customFormListService, router, route) {
         this.customFormListService = customFormListService;
@@ -45,9 +43,6 @@ var CustomFormListComponent = (function () {
     CustomFormListComponent.prototype.ngOnInit = function () {
         this.getRegisteredForms();
     };
-    /*onScroll1(e) {
-      console.log('clickldakfjalf');
-    }*/
     CustomFormListComponent.prototype.getRegisteredForms = function () {
         var _this = this;
         this.dataInAPage = 10;
@@ -56,39 +51,22 @@ var CustomFormListComponent = (function () {
             _this.resultRegisteredForms = registeredForms;
             _this.resultant = _this.resultRegisteredForms;
             _this.resultRegisteredForms = _this.resultRegisteredForms.slice(0, _this.dataInAPage);
-            //console.log('resultant 1 st page',this.resultRegisteredForms);
             _this.totalData = registeredForms.length;
             console.log('data available', _this.totalData);
             _this.totalPages = registeredForms.length / _this.dataInAPage;
-            //this.resultant=this.totalPages;
             _this.totalPages = Math.round(_this.totalPages);
-            //console.log('totalPages',this.totalPages);
-            // this.onScroll();
         });
     };
     CustomFormListComponent.prototype.onScroll = function () {
-        //console.log('onscroll before increement dataInAPage',this.dataInAPage);
         var scrolledValue = this.dataInAPage;
-        //console.log('scrolledValue',scrolledValue);
         this.dataInAPage += 10;
-        // console.log('onscroll after increement dataInAPage',this.dataInAPage);
         this.page = this.page + 1;
-        //console.log('Current page',this.page);
         if (this.page <= this.totalPages) {
             this.resultRegisteredForms = this.resultant.slice(0, this.dataInAPage);
-            //console.log('resultant 2nd page',this.resultRegisteredForms); 
         }
         else {
             this.resultRegisteredForms = this.resultant.slice(0, this.totalData);
-        } /*else{
-          alert('no more pages to load')
-        }*/
-        // if(this.dataInAPage === this.totalData){
-        //   alert('no more pages to load');
-        // }else{
-        //   this.resultRegisteredForms === this.resultant.slice(0,this.totalData);
-        // }
-        // alert('no more pages to load')
+        }
     };
     CustomFormListComponent.prototype.redirect = function (email) {
         this.router.navigate(['registeredform/' + email]);
@@ -365,9 +343,6 @@ var EditRegisteredFormComponent = (function () {
         this.customformService.getTemplateData().subscribe(function (tempateData) {
             _this.resultTemplateData = tempateData;
             _this.resulTemplateStateData.push(_this.resultTemplateData);
-            // console.log(tempateData);
-            // console.log(this.resultTemplateData);
-            // console.log(this.resulTemplateStateData);
         });
     };
     EditRegisteredFormComponent.prototype.backTo = function (email) {
@@ -438,9 +413,6 @@ var EditFormService = (function () {
     };
     EditFormService.prototype.updateFormData = function (newFormData) {
         var _this = this;
-        console.log('inside edit serveice', newFormData);
-        // const headers = new Headers();
-        //         headers.append('Content-Type', 'application/json');
         return this.http.patch('api/v1/customform/', newFormData)
             .catch(function (err) {
             _this.snackBar.open('Please try again later..!!!', 'internal server error', {
@@ -491,7 +463,6 @@ var RegisteredFormComponent = (function () {
         this.route = route;
     }
     RegisteredFormComponent.prototype.ngOnInit = function () {
-        console.log('registered form invoked');
         this.getRegisteredForm(this.route.snapshot.params['email']);
     };
     RegisteredFormComponent.prototype.getRegisteredForm = function (email) {
@@ -507,7 +478,6 @@ var RegisteredFormComponent = (function () {
         var _this = this;
         this.registeredFormService.clickthumbs(email).subscribe(function (data) {
             if (data.status === 200) {
-                console.log('liked');
                 _this.getRegisteredForm(email);
             }
         });
@@ -516,9 +486,7 @@ var RegisteredFormComponent = (function () {
         var _this = this;
         this.registeredFormService.unClickthumbs(email).subscribe(function (data) {
             if (data.status === 200) {
-                console.log('unliked');
                 _this.getRegisteredForm(email);
-                console.log('moved');
             }
         });
     };
@@ -871,7 +839,7 @@ module.exports = "<menu-bar></menu-bar>"
 /***/ 265:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n\n  <!-- <h3 md-Header>LIST OF FORMS</h3> -->\n  <!-- <div infiniteScroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll()\"> -->\n    <!-- <div> -->\n    <md-list>\n      <!-- <button (scroll)=\"onClick($event)\">click me</button> -->\n      <!-- <div infinite-scroll [infiniteScrollDistance]=\"1\" [infiniteScrollThrottle]=\"400\" (scrolled)=\"onScroll1()\" class=\"results\"> -->\n      <!--  <div data-infinite-scroll debounce  [infiniteScrollDistance]=\"2\"  [infiniteScrollThrottle]=\"300\" (scrolled)=\"onScroll1()\"> -->\n      <div *ngFor=\"let form of resultRegisteredForms\" (click)=\"redirect(form.email)\">\n        <md-list-item>\n          <!-- <img md-list-avatar src=\"...\" alt=\"Desc 1\"> -->\n          <md-icon md-list-icon><i class=\"material-icons\">account_circle</i></md-icon>\n          <!-- <i class=\"material-icons\">contact_mail</i> -->\n          <h3 md-line>{{form.username}}</h3>\n          <h3 md-line>{{form.email}}</h3>\n        </md-list-item>\n        <!-- </div> -->\n      </div>\n    </md-list>\n  <!-- </div> -->\n</div>\n<!-- <button (click)=\"onScroll()\">load more.....!!!!</button> -->\n<div *ngIf=\"totalData > dataInAPage\">\n<button (click)=\"onScroll()\">load more.....!!!!</button>\n</div>"
+module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n    <md-list>\n      <div *ngFor=\"let form of resultRegisteredForms\" (click)=\"redirect(form.email)\">\n        <md-list-item>\n          <md-icon md-list-icon><i class=\"material-icons\">account_circle</i></md-icon>\n          <h3 md-line>{{form.username}}</h3>\n          <h3 md-line>{{form.email}}</h3>\n        </md-list-item>\n      </div>\n    </md-list>\n</div>\n<div *ngIf=\"totalData > dataInAPage\">\n<button (click)=\"onScroll()\">load more.....!!!!</button>\n</div>"
 
 /***/ }),
 
@@ -899,7 +867,7 @@ module.exports = "<div [class.dark]=\"isDarkTheme\">\n  <md-sidenav-container fu
 /***/ 269:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n  <div fxFlex=\"50%\" *ngFor=\"let data of resultRegisteredForm\" fx-flex-fill fxLayoutAlign=\"center\">\n    <md-card>\n      <md-card-content>\n        <md-list>\n          <md-list-item>\n            <h3 md-line>{{data.firstname}} Profile</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Registered email is : {{data.email}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Username : {{data.username}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Users First Name is : {{data.firstname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>FullName : {{data.firstname}}  {{data.lastname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Date Of Birth : {{data.dob}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>About me : {{data.about}}</h3>\n          </md-list-item>\n        </md-list>\n        <div>\n            <button (click)=\"onClickEdit(data.email)\">Edit</button>\n          <span class=\"spacer\"></span>\n            <md-button-toggle-group>\n              <div *ngIf=(!data.like)>\n                <md-button-toggle value=\"bad\" (click)=\"onLiked(data.email)\">\n                  <md-icon>thumb_up</md-icon>\n                </md-button-toggle>\n              </div>\n              <div *ngIf=(data.like)>\n                <md-button-toggle value=\"good\" (click)=\"onUnliked(data.email)\">\n                  <md-icon>thumb_down</md-icon>\n                </md-button-toggle>\n              </div>\n            </md-button-toggle-group>\n        </div>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
+module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n  <div fxFlex=\"50%\" *ngFor=\"let data of resultRegisteredForm\" fx-flex-fill fxLayoutAlign=\"center\">\n    <md-card>\n      <md-card-content>\n        <md-list>\n          <md-list-item>\n            <h3 md-line>{{data.firstname}} Profile</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Registered email is : {{data.email}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Username : {{data.username}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Users First Name is : {{data.firstname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>FullName : {{data.firstname}}  {{data.lastname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Date Of Birth : {{data.dob}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>About me : {{data.about}}</h3>\n          </md-list-item>\n        </md-list>\n        <div>\n        <button md-raised-button (click)=\"onClickEdit(data.email)\" color=\"primary\">Edit</button>\n            <!-- <button (click)=\"onClickEdit(data.email)\">Edit</button> -->\n          <span class=\"spacer\"></span>\n            <md-button-toggle-group>\n              <div *ngIf=(!data.like)>\n                <md-button-toggle value=\"bad\" (click)=\"onLiked(data.email)\">\n                  <md-icon>thumb_up</md-icon>\n                </md-button-toggle>\n              </div>\n              <div *ngIf=(data.like)>\n                <md-button-toggle value=\"good\" (click)=\"onUnliked(data.email)\" >\n                  <md-icon color=\"primary\">thumb_up</md-icon>\n                </md-button-toggle>\n              </div>\n            </md-button-toggle-group>\n        </div>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1015,7 +983,6 @@ var RegisteredFormService = (function () {
     };
     RegisteredFormService.prototype.clickthumbs = function (email) {
         var _this = this;
-        console.log('service email', email);
         return this.http.patch('api/v1/customform/liked/' + email, {})
             .catch(function (err) {
             _this.snackBar.open('Please try again later..!!!', 'internal server error', {
@@ -1026,7 +993,6 @@ var RegisteredFormService = (function () {
     };
     RegisteredFormService.prototype.unClickthumbs = function (email) {
         var _this = this;
-        console.log('service email', email);
         return this.http.patch('api/v1/customform/unliked/' + email, {})
             .catch(function (err) {
             _this.snackBar.open('Please try again later..!!!', 'internal server error', {

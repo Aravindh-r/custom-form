@@ -1,7 +1,6 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { Http, Response} from '@angular/http';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import {MdButtonModule} from '@angular/material';
+import { MdDialog, MdDialogRef ,MdButtonModule} from '@angular/material';
 import { Params, RouterModule, Routes, Router, ActivatedRoute } from '@angular/router'
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {RegisteredFormService} from "./registered-form.service";

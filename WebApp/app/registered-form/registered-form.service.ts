@@ -13,7 +13,6 @@ export class RegisteredFormService {
 		.map(response => response.json());
 	}
 	clickthumbs(email:string){
-		console.log('service email',email);
 		return this.http.patch('api/v1/customform/liked/'+email,{})
 		.catch(err => {
                 this.snackBar.open('Please try again later..!!!','internal server error', {
@@ -23,7 +22,6 @@ export class RegisteredFormService {
             });
 	}
 	unClickthumbs(email:string){
-		console.log('service email',email);
 		return this.http.patch('api/v1/customform/unliked/'+email,{})
 		.catch(err => {
                 this.snackBar.open('Please try again later..!!!','internal server error', {
