@@ -34,8 +34,8 @@ export class CustomFormListComponent implements OnInit {
       this.resultant=this.resultRegisteredForms;
       this.resultRegisteredForms=this.resultRegisteredForms.slice(0,this.dataInAPage);
       this.totalData =registeredForms.length;
-      console.log('data available',this.totalData);
-      this.totalPages =registeredForms.length/this.dataInAPage;
+      //console.log('data available',this.totalData);
+      this.totalPages =this.totalData/this.dataInAPage;
       this.totalPages=Math.round(this.totalPages);
   	});
   }
