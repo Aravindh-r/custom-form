@@ -14,9 +14,6 @@ export class EditFormService {
     }
 
  updateFormData(newFormData) {
-   console.log('inside edit serveice',newFormData);
-// const headers = new Headers();
-//         headers.append('Content-Type', 'application/json');
     return this.http.patch('api/v1/customform/', newFormData)
             .catch(err => {
                 this.snackBar.open('Please try again later..!!!','internal server error', {

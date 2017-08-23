@@ -1,5 +1,6 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { Http, Response} from '@angular/http';
+import { MdDialog, MdDialogRef } from '@angular/material';
 import {MdButtonModule} from '@angular/material';
 import { Params, RouterModule, Routes, Router, ActivatedRoute } from '@angular/router'
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -15,6 +16,7 @@ import {RegisteredFormService} from "./registered-form.service";
 export class RegisteredFormComponent implements OnInit {
 
 	constructor(private registeredFormService:RegisteredFormService,
+    private dialog: MdDialog,
   	private router: Router,
   	private route: ActivatedRoute){}
 	resultRegisteredForm;
@@ -26,13 +28,26 @@ export class RegisteredFormComponent implements OnInit {
 	getRegisteredForm(email){
   	this.registeredFormService.getRegisteredForm(email).subscribe((registeredForm)=>{
   		this.resultRegisteredForm=registeredForm;
-
-      // console.log(registeredForm);
-      // console.log(this.resultRegisteredForm);
   	});
   }
   onClickEdit(email : string){
-    console.log(email);
     this.router.navigate(['editregisteredform/'+ email]);
+  }
+  onLiked(email:string){
+this.registeredFormService.clickthumbs(email).subscribe((data)=>{
+   if(data.status === 200)
+      {
+        this.getRegisteredForm(email);
+      }
+});
+  }
+    onUnliked(email:string){
+this.registeredFormService.unClickthumbs(email).subscribe((data)=>{
+   if(data.status === 200)
+      {
+        this.getRegisteredForm(email);
+      }
+});
+
   }
 }

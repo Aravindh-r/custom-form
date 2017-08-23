@@ -157,7 +157,7 @@ var CustomFormListService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__customform_service__ = __webpack_require__(66);
@@ -276,7 +276,7 @@ var SucessDialog = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registered_form_registered_form_service__ = __webpack_require__(67);
@@ -412,7 +412,7 @@ var UpdateDialog = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(24);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditFormService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -466,8 +466,9 @@ var EditFormService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__registered_form_service__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__registered_form_service__ = __webpack_require__(67);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisteredFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -481,38 +482,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RegisteredFormComponent = (function () {
-    function RegisteredFormComponent(registeredFormService, router, route) {
+    function RegisteredFormComponent(registeredFormService, dialog, router, route) {
         this.registeredFormService = registeredFormService;
+        this.dialog = dialog;
         this.router = router;
         this.route = route;
     }
     RegisteredFormComponent.prototype.ngOnInit = function () {
+        console.log('registered form invoked');
         this.getRegisteredForm(this.route.snapshot.params['email']);
     };
     RegisteredFormComponent.prototype.getRegisteredForm = function (email) {
         var _this = this;
         this.registeredFormService.getRegisteredForm(email).subscribe(function (registeredForm) {
             _this.resultRegisteredForm = registeredForm;
-            // console.log(registeredForm);
-            // console.log(this.resultRegisteredForm);
         });
     };
     RegisteredFormComponent.prototype.onClickEdit = function (email) {
-        console.log(email);
         this.router.navigate(['editregisteredform/' + email]);
+    };
+    RegisteredFormComponent.prototype.onLiked = function (email) {
+        var _this = this;
+        this.registeredFormService.clickthumbs(email).subscribe(function (data) {
+            if (data.status === 200) {
+                console.log('liked');
+                _this.getRegisteredForm(email);
+            }
+        });
+    };
+    RegisteredFormComponent.prototype.onUnliked = function (email) {
+        var _this = this;
+        this.registeredFormService.unClickthumbs(email).subscribe(function (data) {
+            if (data.status === 200) {
+                console.log('unliked');
+                _this.getRegisteredForm(email);
+                console.log('moved');
+            }
+        });
     };
     RegisteredFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'registered-form',
             template: __webpack_require__(269),
             //styleUrls: ['./registered-form.component.css'],
-            providers: [__WEBPACK_IMPORTED_MODULE_2__registered_form_service__["a" /* RegisteredFormService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__registered_form_service__["a" /* RegisteredFormService */]]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__registered_form_service__["a" /* RegisteredFormService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__registered_form_service__["a" /* RegisteredFormService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__registered_form_service__["a" /* RegisteredFormService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__registered_form_service__["a" /* RegisteredFormService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["n" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["n" /* MdDialog */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* ActivatedRoute */]) === "function" && _d || Object])
     ], RegisteredFormComponent);
     return RegisteredFormComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=registered-form.component.js.map
@@ -647,7 +667,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs__ = __webpack_require__(247);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_hammerjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser_animations__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_material__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_material__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angular2_markdown__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__custom_form_customform_service__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__custom_form_custom_form_component__ = __webpack_require__(117);
@@ -790,7 +810,7 @@ var environment = {
 /***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(26)(false);
+exports = module.exports = __webpack_require__(27)(false);
 // imports
 
 
@@ -808,7 +828,7 @@ module.exports = module.exports.toString();
 /***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(26)(false);
+exports = module.exports = __webpack_require__(27)(false);
 // imports
 
 
@@ -826,7 +846,7 @@ module.exports = module.exports.toString();
 /***/ 246:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(26)(false);
+exports = module.exports = __webpack_require__(27)(false);
 // imports
 
 
@@ -879,7 +899,7 @@ module.exports = "<div [class.dark]=\"isDarkTheme\">\n  <md-sidenav-container fu
 /***/ 269:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\"\n     fxLayout\n     fxLayout.xs=\"column\"\n     fxLayoutAlign=\"center\"\n     fxLayoutGap=\"10px\"\n     fxLayoutGap.xs=\"0\">\n    <div fxFlex=\"50%\" *ngFor=\"let data of resultRegisteredForm\" fx-flex-fill fxLayoutAlign=\"center\">\n      <md-card>\n      <md-card-content>\n        <md-list>\n          <md-list-item>\n            <h3 md-line>{{data.firstname}} Profile</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Registered email is : {{data.email}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Username : {{data.username}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Users First Name is : {{data.firstname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>FullName : {{data.firstname}}  {{data.lastname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Date Of Birth : {{data.dob}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>\n          </md-list-item>\n           <md-list-item>\n            <h3 md-line>About me : {{data.about}}</h3>\n          </md-list-item>\n        </md-list>\n         <button (click)= \"onClickEdit(data.email)\">Edit</button>\n        </md-card-content>       \n      </md-card>\n    </div>\n</div>"
+module.exports = "<div class=\"container\" fxLayout fxLayout.xs=\"column\" fxLayoutAlign=\"center\" fxLayoutGap=\"10px\" fxLayoutGap.xs=\"0\">\n  <div fxFlex=\"50%\" *ngFor=\"let data of resultRegisteredForm\" fx-flex-fill fxLayoutAlign=\"center\">\n    <md-card>\n      <md-card-content>\n        <md-list>\n          <md-list-item>\n            <h3 md-line>{{data.firstname}} Profile</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Registered email is : {{data.email}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Username : {{data.username}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Users First Name is : {{data.firstname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>FullName : {{data.firstname}}  {{data.lastname}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Date Of Birth : {{data.dob}} </h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>\n          </md-list-item>\n          <md-list-item>\n            <h3 md-line>About me : {{data.about}}</h3>\n          </md-list-item>\n        </md-list>\n        <div>\n            <button (click)=\"onClickEdit(data.email)\">Edit</button>\n          <span class=\"spacer\"></span>\n            <md-button-toggle-group>\n              <div *ngIf=(!data.like)>\n                <md-button-toggle value=\"bad\" (click)=\"onLiked(data.email)\">\n                  <md-icon>thumb_up</md-icon>\n                </md-button-toggle>\n              </div>\n              <div *ngIf=(data.like)>\n                <md-button-toggle value=\"good\" (click)=\"onUnliked(data.email)\">\n                  <md-icon>thumb_down</md-icon>\n                </md-button-toggle>\n              </div>\n            </md-button-toggle-group>\n        </div>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -901,7 +921,7 @@ module.exports = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(24);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CustomformService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -966,6 +986,9 @@ var CustomformService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(24);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisteredFormService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -979,21 +1002,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { MdSnackBar } from '@angular/material';
+
+
 var RegisteredFormService = (function () {
-    function RegisteredFormService(http) {
+    function RegisteredFormService(http, snackBar) {
         this.http = http;
+        this.snackBar = snackBar;
     }
     RegisteredFormService.prototype.getRegisteredForm = function (email) {
         return this.http.get('api/v1/customform/' + email)
             .map(function (response) { return response.json(); });
     };
+    RegisteredFormService.prototype.clickthumbs = function (email) {
+        var _this = this;
+        console.log('service email', email);
+        return this.http.patch('api/v1/customform/liked/' + email, {})
+            .catch(function (err) {
+            _this.snackBar.open('Please try again later..!!!', 'internal server error', {
+                duration: 3000
+            });
+            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(err); // observable needs to be returned or exception raised
+        });
+    };
+    RegisteredFormService.prototype.unClickthumbs = function (email) {
+        var _this = this;
+        console.log('service email', email);
+        return this.http.patch('api/v1/customform/unliked/' + email, {})
+            .catch(function (err) {
+            _this.snackBar.open('Please try again later..!!!', 'internal server error', {
+                duration: 3000
+            });
+            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(err); // observable needs to be returned or exception raised
+        });
+    };
     RegisteredFormService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["m" /* MdSnackBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["m" /* MdSnackBar */]) === "function" && _b || Object])
     ], RegisteredFormService);
     return RegisteredFormService;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=registered-form.service.js.map

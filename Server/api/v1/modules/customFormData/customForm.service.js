@@ -10,8 +10,6 @@ const logger = require('../../../../logger');
 
 const CUSTOMDATA_TABLE = 'customdata';
 
-const FORMLIKED_TABLE= 'likememberform';
-
 const client = new model.Client({
   contactPoints: [connectionString.contact],
   protocolOptions: {
@@ -25,11 +23,11 @@ const client = new model.Client({
  */
 
 function addMemberForm(data, done) {
-  const query = (`INSERT INTO ${CUSTOMDATA_TABLE} (email,username,firstname,lastname,dob,addressline1,city,addressline2,state,pincode,about) values(?,?,?,?,?,?,?,?,?,?,?)`);
+  const query = (`INSERT INTO ${CUSTOMDATA_TABLE} (email,username,firstname,lastname,dob,addressline1,city,addressline2,state,pincode,about,like) values(?,?,?,?,?,?,?,?,?,?,?,false)`);
   return client.execute(query, data, (err) => {
 
     if (!err) {
-      logger.debug('inside');
+      //logger.debug('inside');
       done(null);
     } else {
       done(err);
@@ -42,7 +40,7 @@ function updateMemberForm(data, done) {
   return client.execute(query, data, (err) => {
     logger.debug('query inside update',query);
     if (!err) {
-      logger.debug('inside');
+      //logger.debug('inside');
       done(null);
     } else {
       done(err);
@@ -55,9 +53,6 @@ function getRegisteredForms(done) {
   return client.execute(query, (err, results) => {
     if (!err) {
       if (results.rows.length > 0) {
-        // logger.debug('All Forms Received', results);
-        // logger.debug('pageState', results.pageState);
-        // logger.debug('nextPage', results.nextPage);
         done(undefined, results.rows);
       } else {
         done(err, undefined);
@@ -73,7 +68,7 @@ function getRegisteredForm(email, done) {
   return client.execute(query, (err, results) => {
     if (!err) {
       if (results.rows.length > 0) {
-        logger.debug('Form Received');
+        //logger.debug('Form Received');
         done(undefined, results.rows);
       } else {
         done(err, undefined);
@@ -85,11 +80,12 @@ function getRegisteredForm(email, done) {
 }
 
 function likeMemberForm(data, done) {
-  const query = (`UPDATE ${CUSTOMDATA_TABLE} set username = ? , firstname = ?,lastname = ?,addressline1 = ?,city= ? ,state=?,addressline2 = ?,pincode = ?,about = ? WHERE email = ?`);
+  console.log(data);
+  const query = (`UPDATE ${CUSTOMDATA_TABLE} set like = true WHERE email = ?`);
   return client.execute(query, data, (err) => {
     logger.debug('query inside update',query);
     if (!err) {
-      logger.debug('inside');
+      //logger.debug('inside');
       done(null);
     } else {
       done(err);
@@ -98,11 +94,11 @@ function likeMemberForm(data, done) {
 }
 
 function unlikeMemberForm(data, done) {
-  const query = (`UPDATE ${CUSTOMDATA_TABLE} set username = ? , firstname = ?,lastname = ?,addressline1 = ?,city= ? ,state=?,addressline2 = ?,pincode = ?,about = ? WHERE email = ?`);
+  const query = (`UPDATE ${CUSTOMDATA_TABLE} set like = false WHERE email = ?`);
   return client.execute(query, data, (err) => {
     logger.debug('query inside update',query);
     if (!err) {
-      logger.debug('inside');
+      //logger.debug('inside');
       done(null);
     } else {
       done(err);

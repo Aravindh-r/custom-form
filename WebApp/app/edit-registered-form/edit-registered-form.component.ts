@@ -83,9 +83,6 @@ editForm(){
   	this.customformService.getTemplateData().subscribe((tempateData)=>{
   		this.resultTemplateData =tempateData;
       this.resulTemplateStateData.push(this.resultTemplateData);
-      // console.log(tempateData);
-      // console.log(this.resultTemplateData);
-      // console.log(this.resulTemplateStateData);
   	});
   }
   backTo(email:string){

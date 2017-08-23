@@ -1,11 +1,6 @@
-<div class="container"
-     fxLayout
-     fxLayout.xs="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px"
-     fxLayoutGap.xs="0">
-    <div fxFlex="50%" *ngFor="let data of resultRegisteredForm" fx-flex-fill fxLayoutAlign="center">
-      <md-card>
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="50%" *ngFor="let data of resultRegisteredForm" fx-flex-fill fxLayoutAlign="center">
+    <md-card>
       <md-card-content>
         <md-list>
           <md-list-item>
@@ -29,12 +24,27 @@
           <md-list-item>
             <h3 md-line>Address for Commnunication: {{data.addressline1}} ,{{data.addressline2}} ,{{data.city}},{{data.state}},  {{data.pincode}}</h3>
           </md-list-item>
-           <md-list-item>
+          <md-list-item>
             <h3 md-line>About me : {{data.about}}</h3>
           </md-list-item>
         </md-list>
-         <button (click)= "onClickEdit(data.email)">Edit</button>
-        </md-card-content>       
-      </md-card>
-    </div>
+        <div>
+            <button (click)="onClickEdit(data.email)">Edit</button>
+          <span class="spacer"></span>
+            <md-button-toggle-group>
+              <div *ngIf=(!data.like)>
+                <md-button-toggle value="bad" (click)="onLiked(data.email)">
+                  <md-icon>thumb_up</md-icon>
+                </md-button-toggle>
+              </div>
+              <div *ngIf=(data.like)>
+                <md-button-toggle value="good" (click)="onUnliked(data.email)">
+                  <md-icon>thumb_down</md-icon>
+                </md-button-toggle>
+              </div>
+            </md-button-toggle-group>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>

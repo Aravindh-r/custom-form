@@ -13,7 +13,7 @@ until `telnet $host $port`; do
 	sleep 5
 done
 
->&2 echo "Service is working! Yippie!"
+>&2 echo "Service is working! Yippie! lets start app now"
 
 sleep 1
 

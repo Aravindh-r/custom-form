@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
         logger.debug(err);
         return res.status(400).send(err);
       }else{
-      logger.debug('New Data added');
+      //logger.debug('New Data added');
       return res.status(200).send({ message: 'New Data added' });
     }
     });
@@ -33,13 +33,13 @@ router.post('/', (req, res) => {
 router.patch('/', (req, res) => {
   try {
     const values = req.body;
-    logger.debug(values);
+    //logger.debug(values);
     customFormCtrl.updateMemberForm(values, (err,results) => {
       if (err) {
-        logger.debug(err);
+        //logger.debug(err);
         return res.status(400).send(err);
       }else{
-      logger.debug('New Data added');
+      //logger.debug('New Data added');
       return res.status(200).send({ message: 'New Data added' });
     }
     });
@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
   try {
     customFormCtrl.getRegisteredForms((err, results) => {
       if (err) {
-        logger.debug(err);
+        //logger.debug(err);
         return res.status(400).send(err);
       }
       //logger.debug(results);
@@ -69,7 +69,7 @@ router.get('/:email', (req, res) => {
     const email = req.params.email;
     customFormCtrl.getRegisteredForm(email,(err, results) => {
       if (err) {
-        logger.debug(err);
+        //logger.debug(err);
         return res.status(400).send(err);
       }
       //logger.debug(results);
@@ -80,40 +80,40 @@ router.get('/:email', (req, res) => {
   }
 });
 
-router.patch('/liked', (req, res) => {
+router.patch('/liked/:email', (req, res) => {
   try {
-    const values = req.body;
-    logger.debug(values);
+    const values = req.params;
+    //logger.debug(values);
     customFormCtrl.likeMemberForm(values, (err,results) => {
       if (err) {
-        logger.debug(err);
+        //logger.debug(err);
         return res.status(400).send(err);
       }else{
-      logger.debug('New Data added');
-      return res.status(200).send({ message: 'New Data added' });
+      //logger.debug('Your profile is liked');
+      return res.status(200).send({ message: 'Your profile is liked' });
     }
     });
   } catch (err) {
-    logger.debug('Unexpected error in inserting values ', err);
+    //logger.debug('Unexpected error in inserting values ', err);
     res.status(500).send({ error: 'Unexpected error occurred, please try again...! ' });
   }
 });
 
-router.patch('/disliked', (req, res) => {
+router.patch('/unliked/:email', (req, res) => {
   try {
-    const values = req.body;
-    logger.debug(values);
-    customFormCtrl.dislikeMemberForm(values, (err,results) => {
+    const values = req.params;
+    //logger.debug(values);
+    customFormCtrl.unlikeMemberForm(values, (err,results) => {
       if (err) {
-        logger.debug(err);
+        //logger.debug(err);
         return res.status(400).send(err);
       }else{
-      logger.debug('New Data added');
-      return res.status(200).send({ message: 'New Data added' });
+      //logger.debug('Your profile is unliked');
+      return res.status(200).send({ message: 'Your profile is unliked' });
     }
     });
   } catch (err) {
-    logger.debug('Unexpected error in inserting values ', err);
+    //logger.debug('Unexpected error in inserting values ', err);
     res.status(500).send({ error: 'Unexpected error occurred, please try again...! ' });
   }
 })

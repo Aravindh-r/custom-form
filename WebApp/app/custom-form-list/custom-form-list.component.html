@@ -1,26 +1,14 @@
 <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-
-  <!-- <h3 md-Header>LIST OF FORMS</h3> -->
-  <!-- <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="400" (scrolled)="onScroll()"> -->
-    <!-- <div> -->
     <md-list>
-      <!-- <button (scroll)="onClick($event)">click me</button> -->
-      <!-- <div infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="400" (scrolled)="onScroll1()" class="results"> -->
-      <!--  <div data-infinite-scroll debounce  [infiniteScrollDistance]="2"  [infiniteScrollThrottle]="300" (scrolled)="onScroll1()"> -->
       <div *ngFor="let form of resultRegisteredForms" (click)="redirect(form.email)">
         <md-list-item>
-          <!-- <img md-list-avatar src="..." alt="Desc 1"> -->
           <md-icon md-list-icon><i class="material-icons">account_circle</i></md-icon>
-          <!-- <i class="material-icons">contact_mail</i> -->
           <h3 md-line>{{form.username}}</h3>
           <h3 md-line>{{form.email}}</h3>
         </md-list-item>
-        <!-- </div> -->
       </div>
     </md-list>
-  <!-- </div> -->
 </div>
-<!-- <button (click)="onScroll()">load more.....!!!!</button> -->
 <div *ngIf="totalData > dataInAPage">
 <button (click)="onScroll()">load more.....!!!!</button>
 </div>

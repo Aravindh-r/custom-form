@@ -20,7 +20,7 @@ const queries = [];
 /**
  * Describing Table for Custom Form
  */
-queries.push(`CREATE TABLE IF NOT EXISTS ${KEYSPACE}.${CUSTOMDATA_TABLE} ( username text,firstname text,lastname text,email text,dob text,addressline1 text,addressline2 text,city text,state text,pincode text,about text,PRIMARY KEY (email));`);
+queries.push(`CREATE TABLE IF NOT EXISTS ${KEYSPACE}.${CUSTOMDATA_TABLE} ( username text,firstname text,lastname text,email text,dob text,addressline1 text,addressline2 text,city text,state text,pincode text,about text,like boolean ,PRIMARY KEY (email));`);
 /**
  * Describing Table for templates
  */
